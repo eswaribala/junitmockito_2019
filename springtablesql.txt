@@ -1,0 +1,63 @@
+String encoded=new BCryptPasswordEncoder().encode("admin@123");
+System.out.println(encoded);
+
+
+
+create table users(
+	username varchar(50) not null primary key,
+	password varchar(100) not null,
+	enabled number(1) not null
+);
+create table user_roles (
+	username varchar(50) not null,
+	role varchar(50) not null,
+	constraint fk_user_roles foreign key(username) references users(username)
+);
+create unique index ix_auth_username on user_roles (username,role);
+Insert some data into users and authorities tables.
+
+insert into users(username,password,enabled)
+	values('admin','$2a$10$.l5Bv2XzBO1OHvCNIOOiO.pLTBfm1/9FGbDoJd5p5QwjZ3Bz/Fu86',1);
+insert into users(username,password,enabled) values('eswari','$2a10$M8cniX7oBJvC/QGsOJBsK.F/sG/hSifmcbyCSndkSj6z4xOMLYjMK',1);
+
+insert into users(username,password,enabled)
+	values('viki','$2a$10$juK.RFwaC3B/HdSZjhCINu8r7h2ElYh1nowQvNJOltrFCBKnlOKpC',1);
+
+insert into users(username,password,enabled)
+	values('akshay','$2a$10$rt7xgbTw1bvdu1VacxpqiOc1k5dxYTJh2GAc8qOkToXS6ApTVY4My',1);
+
+insert into users(username,password,enabled)
+values('eswari','$2a$10$rgIQSyzwJB.lAzo0uGvNFeyviLXc5UCttk01tzqhpmd8xmJ8jb3v2,true);
+
+insert into users(username,password,enabled)
+values('admin',$2a$10$6zp4U333BQfS7JZppOBby.oI9c8D6.ddDXoHnjFbqzZ0mVoV8bqem',true);
+
+
+insert into day14users(username,password,enabled)
+	values('admin','$2a$10$Wav1gIEjixlnH.W0sUyR4eakalQO5iIpcdPohjYWqe21zY3UnBQe2',1);
+
+insert into boamumbaidb.users(username,password,enabled)
+	values('admin','$2a$10$Wav1gIEjixlnH.W0sUyR4eakalQO5iIpcdPohjYWqe21zY3UnBQe2',true);
+
+insert into boamumbaidb.users(username,password,enabled)
+	values('test','$2a$10$iRf1G95SKfcWNWCbWJKgv.3zXrqzeC1sbYrhICOA3VP2hIlrztDRa',true);
+insert into boamumbaidb.user_roles(username,role) 
+	values('test','ROLE_ADMIN');
+commit;
+insert into virtusacustomerdb.user_roles(username,role) 
+	values('eswari','ROLE_USER');
+commit;
+
+insert into virtusacustomerdb.user_roles(username,role) 
+	values('admin','ROLE_ADMIN');
+commit;
+
+insert into user_roles(username,role) 
+	values('viki','ROLE_ADMIN');
+commit;
+insert into user_roles(username,role) 
+	values('akshay','ROLE_USER');
+
+commit;
+
+
